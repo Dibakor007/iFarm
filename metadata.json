@@ -1,0 +1,7 @@
+{
+  "name": "iFarm – স্মার্ট কৃষি ব্যবস্থাপনা",
+  "description": "A premium agriculture, cold storage, and supply chain management dashboard designed for the Bangladesh market.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
