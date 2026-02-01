@@ -1,31 +1,52 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  <img width="1200" height="475" alt="iFarm Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run and deploy your AI Studio app
+# iFarm
 
-This contains everything you need to run your app locally.
+A full-stack Cold Storage / Farm management dashboard.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1ZUKFtMjcAcV2Vt-09BG-I2S5sAK4tV_Y
+## Prerequisites
 
-## Run Locally
+- Node.js (LTS recommended)
+- MySQL (e.g., XAMPP) for the backend
 
-**Prerequisites:**  Node.js
-
+## Quick start (Frontend)
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+   - `npm install`
+2. Create a local env file (do not commit it):
+   - Copy `.env.example` → `.env.local`
+   - Fill `GEMINI_API_KEY` if you want AI features
 3. Run the app:
-   `npm run dev`
+   - `npm run dev`
 
-## Backend API
+Frontend runs on `http://localhost:3000`.
 
-The dashboard now pulls farm metadata directly from the backend, so make sure the API is running before you fire up the Vite server:
+## Quick start (Backend)
 
-1. Switch into the backend directory (`cd ifarm-backend`) and install dependencies (`npm install`).
-2. Copy `.env` to `.env.local` and fill in the MySQL credentials described in `ifarm-backend/README.md`.
-3. Start the backend (`npm run dev`). It listens on port 4000 by default and exposes `/api/v1/farms` plus `/health`.
-4. Back in the frontend workspace, run `npm run dev` again; Vite proxies `/api` → `http://localhost:4000` so the dashboard can query the live data without needing CORS headers.
+1. Open a new terminal and go to the backend:
+   - `cd ifarm-backend`
+2. Install dependencies:
+   - `npm install`
+3. Create the backend env file (do not commit it):
+   - Copy `.env.example` → `.env.local`
+   - Fill your DB credentials and other settings
+4. Start the backend:
+   - `npm run dev`
 
-If you host the backend elsewhere, set `VITE_API_BASE_URL` (and optionally `VITE_API_BASE_PATH`) in `.env.local`, then restart the frontend server so `lib/apiClient.ts` picks up the new base URL.
+Backend runs on `http://localhost:4000` by default.
+
+### Health checks
+
+- Backend root health: `http://localhost:4000/health`
+- API health: `http://localhost:4000/api/v1/health`
+
+## API + Proxy notes
+
+During development, the Vite dev server proxies `/api` → `http://localhost:4000`.
+If you host the backend elsewhere, set `VITE_API_BASE_URL` (and optionally `VITE_API_BASE_PATH`) in `.env.local` at the repo root.
+
+## Security
+
+- Do not commit `.env.local` (real keys / DB credentials). This repo includes `.env.example` templates instead.
